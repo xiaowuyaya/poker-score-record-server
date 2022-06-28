@@ -2,7 +2,7 @@
  * @Author: xiaowuyaya
  * @Date: 2022-06-28 12:03:01
  * @LastEditors: xiaowuyaya 282143356@qq.com
- * @LastEditTime: 2022-06-28 12:11:58
+ * @LastEditTime: 2022-06-28 16:48:45
  * @FilePath: \poker-score-record-server\app\model\user.js
  * @Description: 用户表实体类
  * 

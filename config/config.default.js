@@ -1,3 +1,13 @@
+/*
+ * @Author: xiaowuyaya
+ * @Date: 2022-06-28 13:32:38
+ * @LastEditors: xiaowuyaya 282143356@qq.com
+ * @LastEditTime: 2022-06-29 03:37:05
+ * @FilePath: \poker-score-record-server\config\config.default.js
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by xiaowuyaya 282143356@qq.com, All Rights Reserved. 
+ */
 /* eslint valid-jsdoc: "off" */
 
 'use strict'
@@ -18,6 +28,14 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = []
 
+  // 取消安全证书验证csrf
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+    domainWhiteList: ["*"], // 白名单
+  }
+
   // 允许跨域
   config.cors = {
     credentials: true,
@@ -28,11 +46,10 @@ module.exports = appInfo => {
   // jwt
   config.jwt = {
     secret: config.keys,
-    expiresIn: '24h',
+    expiresIn: '9999h',
   }
 
   // 参数
-
   config.validate = {
     enable: true,
     package: 'egg-validate',
@@ -51,6 +68,26 @@ module.exports = appInfo => {
     database: 'poker_score_record',
     username: 'root',
     password: 'Liao60520',
+  }
+
+  //redis
+  config.redis = {
+    client: {
+      port: 6379,          // Redis port
+      host: '127.0.0.1',   // Redis host
+      password: '',
+      db: 0
+    }
+  }
+
+  // io.websocket
+  config.io = {
+    namespace: {
+      '/': {
+        connectionMiddleware: ['user_auth'],
+        packetMiddleware: []
+      }
+    }
   }
 
   // add your user config here

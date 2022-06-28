@@ -2,7 +2,7 @@
  * @Author: xiaowuyaya
  * @Date: 2022-06-28 12:03:01
  * @LastEditors: xiaowuyaya 282143356@qq.com
- * @LastEditTime: 2022-06-28 12:46:05
+ * @LastEditTime: 2022-06-28 23:42:46
  * @FilePath: \poker-score-record-server\app\controller\user.js
  * @Description: 用户相关控制器
  * 
@@ -15,7 +15,7 @@ const WXBizDataCrypt = require('../utils/WXBizDataCrypt')
 class UserController extends BaseController {
 
 	/**
-	 * 用户授权店登入
+	 * 用户授权登入
 	 * @return {Promise<void>}
 	 */
 	async authLogin () {
@@ -42,10 +42,37 @@ class UserController extends BaseController {
 			const encodeData = pc.decryptData(encryptedData, iv) // 获取解密数据
 
 			// 用户信息入库
-			await service.user.authLogin(encodeData.nick_name, encodeData.avatar_url, encodeData.province, encodeData.city, encodeData.gender, encodeData.openid)
-			this.success()
+			const jwtToken = await service.user.authLogin(encodeData.nickName, encodeData.avatarUrl, encodeData.province, encodeData.city, encodeData.gender, resp.data.openid)
+
+			const result = {
+				token: jwtToken,
+				userInfo: {
+					nickName: encodeData.nickName,
+					avatarUrl: encodeData.avatarUrl,
+					province: encodeData.province,
+					city: encodeData.city,
+					gender: encodeData.gender
+				}
+			}
+
+			this.success(result)
+
 		} catch (err) {
-			this.fail(err)
+			this.fail(JSON.stringify(err))
+		}
+	}
+
+	/**
+	 * 根据用户id查找用户信息
+	 */
+	async findUserById () {
+		const { ctx, app, service } = this
+		try {
+			const { userId } = ctx.request.body
+			const result = await service.user.findUserById(userId)
+			this.success(result)
+		} catch (err) {
+			this.fail(JSON.stringify(err))
 		}
 	}
 

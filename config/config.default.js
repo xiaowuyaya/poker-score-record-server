@@ -2,7 +2,7 @@
  * @Author: xiaowuyaya
  * @Date: 2022-06-28 13:32:38
  * @LastEditors: xiaowuyaya 282143356@qq.com
- * @LastEditTime: 2022-06-29 03:37:05
+ * @LastEditTime: 2022-06-29 20:40:55
  * @FilePath: \poker-score-record-server\config\config.default.js
  * @Description: 
  * 
@@ -84,7 +84,7 @@ module.exports = appInfo => {
   config.io = {
     namespace: {
       '/': {
-        connectionMiddleware: ['user_auth'],
+        connectionMiddleware: [],
         packetMiddleware: []
       }
     }

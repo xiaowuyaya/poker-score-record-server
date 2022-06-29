@@ -4,7 +4,7 @@
  * @LastEditors: xiaowuyaya 282143356@qq.com
  * @LastEditTime: 2022-06-29 03:30:38
  * @FilePath: \poker-score-record-server\app\io\middleware\user_auth.js
- * @Description: 
+ * @Description: socket链接fitter
  * 
  * Copyright (c) 2022 by xiaowuyaya 282143356@qq.com, All Rights Reserved. 
  */
